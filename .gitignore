@@ -1,0 +1,36 @@
+# Local system and editor files
+.DS_Store
+._*
+.idea/
+.vscode/
+.codex/
+.claude/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+secrets*
+
+# Private notes, chat exports, databases, and logs
+private/
+private-*/
+聊天来源索引.md
+原始记录/
+*.jsonl
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.db
+*.db-*
+*.log
+*.bak
+*.tmp
+
+# Build and dependency directories
+node_modules/
+dist/
+build/
