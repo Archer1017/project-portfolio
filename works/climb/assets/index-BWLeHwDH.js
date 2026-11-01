@@ -23,23 +23,23 @@ Error generating stack: `+e.message+`
     margin-right: ${s}px ${r};
     `,n===`padding`&&`padding-right: ${s}px ${r};`].filter(Boolean).join(``)}
   }
-  
+
   .${ra} {
     right: ${s}px ${r};
   }
-  
+
   .${ia} {
     margin-right: ${s}px ${r};
   }
-  
+
   .${ra} .${ra} {
     right: 0 ${r};
   }
-  
+
   .${ia} .${ia} {
     margin-right: 0 ${r};
   }
-  
+
   body[${Aa}] {
     ${oa}: ${s}px;
   }
