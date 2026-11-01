@@ -2,7 +2,13 @@
   "title": "项目作品集",
   "counts": {
     "projects": 17,
-    "concepts": 1
+    "concepts": 1,
+    "independent_repositories": 9,
+    "source_repositories": 14,
+    "documentation_repositories": 3,
+    "concept_repositories": 1,
+    "prepared_repositories": 18,
+    "pending_repositories": 9
   },
   "projects": [
     {
@@ -21,7 +27,10 @@
         "主版本仍需整合。",
         "积分、登录状态、答案解析等流程仍需回归验证。",
         "部分学习功能使用本地持久化。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/ai-public-classroom",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P02",
@@ -39,7 +48,11 @@
         "不同版本的能力需要分别确认。",
         "离线演示使用本地药品选择，不能视为真实药盒识别。",
         "OCR准确性、NFC及原生通知仍需真机验证。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/medicine-identifier",
+      "repository_kind": "source",
+      "repository_scope": "当前仓库收录 uni-app 主原型，其他技术版本尚未合并。",
+      "sync_status": "published"
     },
     {
       "id": "P03",
@@ -56,7 +69,10 @@
       "limitations": [
         "账户、云同步、真实天气和地图尚未接入。",
         "AI候选路线需要人工核对，不能作为安全认证。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/climbmate",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P04",
@@ -73,7 +89,10 @@
         "真实AI需要运行服务并配置接口。",
         "整体回归验收仍需完成。",
         "语音能力依赖浏览器与运行环境。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/calm-finance",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P05",
@@ -89,7 +108,10 @@
       "limitations": [
         "进行中的一局尚未完整持久化。",
         "结算流程仍需回归验证。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/life-restart-simulator",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P06",
@@ -104,7 +126,10 @@
       "status": "已有React、TypeScript网站框架。",
       "limitations": [
         "展示内容和图片仍包含示例素材。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/immersive-portfolio",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P07",
@@ -119,7 +144,10 @@
       "status": "已有五页静态网站模板。",
       "limitations": [
         "当前图片包含图库示例，正式展示需替换授权素材。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/between-light",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P08",
@@ -133,7 +161,10 @@
       "status": "已有HTML模板。",
       "limitations": [
         "示例文案不代表真实履历。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/profile-page-template",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P09",
@@ -148,7 +179,10 @@
       "status": "已有单文件离线HTML原型。",
       "limitations": [
         "当前为同机双人模式，尚未实现网络联机。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/light-and-shadow",
+      "repository_kind": "source",
+      "sync_status": "published"
     },
     {
       "id": "P10",
@@ -163,7 +197,10 @@
       "status": "已有HTML、样式和脚本原型。",
       "limitations": [
         "完整关卡和机关流程仍需回归游玩。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/bunny-burrow-duo",
+      "repository_kind": "source",
+      "sync_status": "pending"
     },
     {
       "id": "P11",
@@ -178,7 +215,11 @@
       "status": "保留原型设计和开发说明。",
       "limitations": [
         "完整可运行交付物仍待整理。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/rainy-repair-shop",
+      "repository_kind": "docs-only",
+      "repository_scope": "当前仅收录项目说明，完整源码尚未找回。",
+      "sync_status": "pending"
     },
     {
       "id": "P12",
@@ -194,7 +235,11 @@
       "limitations": [
         "完整可运行交付物仍待整理。",
         "项目名称暂定。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/beast-runner",
+      "repository_kind": "docs-only",
+      "repository_scope": "当前仅收录项目说明，完整源码尚未找回。",
+      "sync_status": "pending"
     },
     {
       "id": "P13",
@@ -207,7 +252,10 @@
       "status": "已有早期原型文件。",
       "limitations": [
         "玩法与完成度有限。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/stardrop-runner",
+      "repository_kind": "source",
+      "sync_status": "pending"
     },
     {
       "id": "P14",
@@ -222,7 +270,10 @@
       "status": "已有单文件离线HTML体验。",
       "limitations": [
         "定位为视觉表达与交互体验，不提供心理诊断。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/dream-weather",
+      "repository_kind": "source",
+      "sync_status": "pending"
     },
     {
       "id": "P15",
@@ -238,7 +289,11 @@
       "limitations": [
         "完整可运行交付物仍待整理。",
         "真实挂号后台和地图服务尚未确认接入。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/hospital-website-template",
+      "repository_kind": "docs-only",
+      "repository_scope": "当前仅收录项目说明，完整源码尚未找回。",
+      "sync_status": "pending"
     },
     {
       "id": "P16",
@@ -252,7 +307,10 @@
       "status": "已有静态HTML原型。",
       "limitations": [
         "公开部署状态未确认。"
-      ]
+      ],
+      "repository": "https://github.com/Archer1017/cheesy-quotes",
+      "repository_kind": "source",
+      "sync_status": "pending"
     },
     {
       "id": "P17",
@@ -263,10 +321,14 @@
         "四人随机转盘交互。",
         "uni-app与Vue页面原型。"
       ],
-      "status": "已有Vue页面。",
+      "status": "从历史代码恢复 Vue 页面，并补齐截断样式与最小启动入口。",
       "limitations": [
-        "参与者展示采用匿名占位。"
-      ]
+        "参与者展示采用匿名占位。",
+        "尚未进行 HBuilderX 真机运行与动画抽选回归。"
+      ],
+      "repository": "https://github.com/Archer1017/random-spinner",
+      "repository_kind": "source",
+      "sync_status": "pending"
     }
   ],
   "concepts": [
@@ -274,7 +336,11 @@
       "id": "C01",
       "name": "带茶漏的蓝色保温杯",
       "summary": "带人体工学手柄、真空隔热结构和可拆卸茶漏的产品设计构想。",
-      "status": "已整理设计需求与渲染提示词，尚未确认成品渲染或工程模型。"
+      "status": "已整理设计需求与渲染提示词，尚未确认成品渲染或工程模型。",
+      "repository": "https://github.com/Archer1017/tea-thermos-concept",
+      "repository_kind": "concept",
+      "sync_status": "pending"
     }
-  ]
+  ],
+  "sync_note": "GitHub 临时限制短时间批量建仓；待同步项目的脱敏内容已在本地准备完成。"
 }

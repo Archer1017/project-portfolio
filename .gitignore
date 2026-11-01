@@ -34,3 +34,6 @@ private-*/
 node_modules/
 dist/
 build/
+
+# Independent project checkouts and local previews
+github-projects/
