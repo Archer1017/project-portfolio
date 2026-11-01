@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fff3bc">
+  <title>安心财务工作台</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <div class="header-inner">
+        <button class="brand" id="homeBtn" type="button" aria-label="安心财务工作台，返回今天">
+          <span class="brand-mark">¥</span>
+          <span class="brand-name">安心财务<span class="brand-suffix">我的生活手账</span></span>
+        </button>
+        <div class="header-actions">
+          <span class="saved-status"><i data-lucide="check" aria-hidden="true"></i>已保存在本机</span>
+          <span class="header-divider" aria-hidden="true"></span>
+          <button class="icon-button" id="themeBtn" type="button" aria-label="切换主题" data-tooltip="切换主题"><i data-lucide="moon" aria-hidden="true"></i></button>
+          <button class="icon-button" id="backupBtn" type="button" aria-label="备份与恢复" data-tooltip="备份与恢复"><i data-lucide="archive" aria-hidden="true"></i></button>
+          <span class="profile-avatar" aria-label="我的空间"><img src="./assets/stickers/cat.svg" alt="" width="30" height="30"></span>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <section class="welcome">
+        <div class="welcome-copy"><p class="welcome-label"><span class="notebook-tag">生活慢慢来</span><span id="todayDate"></span></p><h1>认真攒钱，<span class="marker-text">快乐生活。</span></h1><p class="welcome-subtitle">每一份小小的底气，都在让喜欢的日子靠近。</p></div>
+        <button class="hello-assistant" id="helloAssistantBtn" type="button" aria-label="和小安聊聊"><span class="hello-bubble">嗨，我是小安！<small>今天也陪你一起打理生活</small></span><img src="./assets/stickers/cat.svg" alt="小安" width="88" height="88"></button>
+      </section>
+      <nav class="nav" id="moduleNav" aria-label="财务模块"></nav>
+      <section class="backup-panel" id="backupPanel" aria-label="备份与恢复">
+        <div class="panel-header"><h2>备份与恢复</h2><p>生成一段本地备份文本，手动保存到备忘录。恢复时粘贴回来即可。</p></div>
+        <div class="panel-body">
+          <div class="field"><label for="backupText">备份文本</label><textarea id="backupText" spellcheck="false"></textarea><p class="hint">请长按或全选后手动复制备份文本，也可以保存到自己的备忘录。</p></div>
+          <div class="actions"><button class="primary" id="makeBackupBtn" type="button">生成备份</button><button class="ghost" id="restoreBackupBtn" type="button">从文本恢复</button><button class="ghost" id="closeBackupBtn" type="button">收起</button></div>
+        </div>
+      </section>
+      <section class="dashboard" aria-label="财务总览">
+        <div class="section-heading"><h2><span class="heading-mark">今天的安心底气</span></h2><button class="text-button" type="button" id="editProfileBtn"><i data-lucide="pencil-line" aria-hidden="true"></i>更新数字</button></div>
+        <div class="summary" id="summary"></div>
+        <div class="coach" id="coach"></div>
+      </section>
+      <section class="workspace" id="workspace">
+        <article class="module-panel">
+          <div class="panel-header" id="moduleHeader"></div>
+          <div class="panel-body" id="moduleBody"></div>
+        </article>
+        <aside class="results-panel">
+          <div class="results-header"><span class="result-icon"><i data-lucide="scan-line" aria-hidden="true"></i></span><h2>算清楚，心里有底</h2><span class="live-tag">实时测算</span></div>
+          <div id="results" aria-live="polite"></div>
+        </aside>
+      </section>
+      <section class="assistant-invitation" id="assistantInvitation">
+        <span class="invitation-icon"><img src="./assets/stickers/cat.svg" alt="" width="64" height="64"></span>
+        <div><span class="assistant-name">小安的悄悄话</span><h2>纠结的事，我们一起想。</h2><p>想买的东西、担心的变化，都可以和我聊聊。</p></div>
+        <button class="primary" id="askAssistantBtn" type="button">找小安聊聊<i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+      </section>
+      <footer class="footer"><span class="footer-brand">安心财务<span>留有余地，自有底气。</span><small class="art-credit">插画 OpenMoji · CC BY-SA 4.0</small></span><p>提示：这是个人决策辅助工具，不替代专业财务、税务或投资建议。计算结果会四舍五入，适合用于规划和比较。</p></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./assets/lucide.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

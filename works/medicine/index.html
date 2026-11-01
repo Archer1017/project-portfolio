@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<title>药品分辨器 - 离线恢复版</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--bg: #ffffff;
+			--fg: #000000;
+			--muted: #444444;
+			--line: #000000;
+			--soft: #f4f4f4;
+			--focus: #000000;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			margin: 0;
+			min-height: 100%;
+			background: var(--bg);
+			color: var(--fg);
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+			letter-spacing: 0;
+			-webkit-font-smoothing: antialiased;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		html {
+			touch-action: manipulation;
+		}
+
+		body {
+			font-size: 18px;
+			line-height: 1.45;
+			-webkit-touch-callout: none;
+		}
+
+		button,
+		input,
+		select,
+		textarea {
+			font: inherit;
+		}
+
+		button:focus-visible,
+		input:focus-visible,
+		select:focus-visible,
+		textarea:focus-visible,
+		[tabindex]:focus-visible {
+			outline: 4px solid var(--focus);
+			outline-offset: 3px;
+		}
+
+		.app {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			min-height: 68px;
+			padding: calc(10px + var(--safe-area-inset-top, env(safe-area-inset-top, 0px))) 16px 10px;
+			border-bottom: 3px solid var(--line);
+			background: var(--bg);
+		}
+
+		.brand {
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+		}
+
+		.brand-title {
+			margin: 0;
+			font-size: 24px;
+			line-height: 1.1;
+			font-weight: 950;
+		}
+
+		.brand-subtitle {
+			margin-top: 2px;
+			color: var(--muted);
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		.top-actions {
+			display: flex;
+			gap: 8px;
+			flex: 0 0 auto;
+		}
+
+		.icon-btn {
+			width: 48px;
+			height: 48px;
+			border: 2px solid var(--line);
+			border-radius: 0;
+			background: var(--bg);
+			color: var(--fg);
+			font-size: 22px;
+			font-weight: 950;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+		}
+
+		.main {
+			flex: 1;
+			padding: 18px 16px calc(112px + var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)));
+			width: 100%;
+			max-width: 1040px;
+			margin: 0 auto;
+		}
+
+		.status {
+			position: sticky;
+			top: 71px;
+			z-index: 15;
+			min-height: 58px;
+			margin: -18px -16px 16px;
+			padding: 10px 16px;
+			border-bottom: 2px solid var(--line);
+			background: var(--soft);
+			font-weight: 900;
+		}
+
+		.page {
+			display: none;
+		}
+
+		.page.active {
+			display: block;
+		}
+
+		.hero {
+			display: grid;
+			grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+			gap: 18px;
+			align-items: stretch;
+			padding: 16px 0 18px;
+			border-bottom: 3px solid var(--line);
+		}
+
+		.hero-copy {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			min-height: 248px;
+		}
+
+		.kicker {
+			display: block;
+			color: var(--muted);
+			font-size: 16px;
+			font-weight: 900;
+		}
+
+		h2,
+		.h1 {
+			margin: 6px 0 10px;
+			font-size: clamp(34px, 8vw, 68px);
+			line-height: 0.96;
+			font-weight: 1000;
+			letter-spacing: 0;
+		}
+
+		.hero-text {
+			max-width: 680px;
+			margin: 0;
+			font-size: 20px;
+			font-weight: 760;
+		}
+
+		.quick-panel {
+			border: 3px solid var(--line);
+			min-height: 248px;
+			display: grid;
+			grid-template-rows: 1fr 1fr;
+			background: var(--bg);
+		}
+
+		.quick-panel button {
+			border: 0;
+			border-bottom: 3px solid var(--line);
+			background: var(--bg);
+			color: var(--fg);
+			font-size: 24px;
+			font-weight: 950;
+			cursor: pointer;
+		}
+
+		.quick-panel button:last-child {
+			border-bottom: 0;
+			background: var(--fg);
+			color: var(--bg);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 12px;
+			margin-top: 16px;
+		}
+
+		.tile,
+		.primary,
+		.secondary,
+		.danger,
+		.pill-btn {
+			border: 2px solid var(--line);
+			border-radius: 0;
+			background: var(--bg);
+			color: var(--fg);
+			cursor: pointer;
+		}
+
+		.tile {
+			min-height: 150px;
+			padding: 16px;
+			text-align: left;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.tile strong {
+			font-size: 28px;
+			line-height: 1.08;
+			font-weight: 1000;
+		}
+
+		.tile span {
+			margin-top: 10px;
+			color: var(--muted);
+			font-size: 16px;
+			font-weight: 800;
+		}
+
+		.tile.dark {
+			background: var(--fg);
+			color: var(--bg);
+		}
+
+		.tile.dark span {
+			color: var(--bg);
+		}
+
+		.section-head {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 14px;
+			margin: 8px 0 14px;
+			padding-bottom: 12px;
+			border-bottom: 3px solid var(--line);
+		}
+
+		.section-head h2 {
+			margin: 0;
+			font-size: 36px;
+			line-height: 1;
+		}
+
+		.section-head p {
+			margin: 0;
+			color: var(--muted);
+			font-weight: 780;
+		}
+
+		.panel {
+			border: 2px solid var(--line);
+			background: var(--bg);
+			padding: 14px;
+			margin: 12px 0;
+		}
+
+		.panel.dark {
+			background: var(--fg);
+			color: var(--bg);
+		}
+
+		.panel-title {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 22px;
+			font-weight: 1000;
+		}
+
+		.controls {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 10px;
+		}
+
+		.primary,
+		.secondary,
+		.danger,
+		.pill-btn {
+			min-height: 64px;
+			padding: 10px 14px;
+			font-weight: 950;
+			text-align: center;
+		}
+
+		.primary {
+			background: var(--fg);
+			color: var(--bg);
+		}
+
+		.danger {
+			border-style: dashed;
+		}
+
+		.input-row {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) auto;
+			gap: 10px;
+			align-items: end;
+			margin: 10px 0;
+		}
+
+		label {
+			display: block;
+			font-weight: 950;
+			margin-bottom: 5px;
+		}
+
+		input,
+		select,
+		textarea {
+			width: 100%;
+			min-height: 56px;
+			border: 2px solid var(--line);
+			border-radius: 0;
+			background: var(--bg);
+			color: var(--fg);
+			padding: 10px 12px;
+			font-size: 18px;
+			font-weight: 760;
+		}
+
+		textarea {
+			min-height: 96px;
+			resize: vertical;
+		}
+
+		.camera-wrap {
+			position: relative;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(260px, 0.52fr);
+			gap: 14px;
+			align-items: stretch;
+		}
+
+		.camera-box {
+			position: relative;
+			min-height: 420px;
+			border: 3px solid var(--line);
+			background: var(--fg);
+			overflow: hidden;
+		}
+
+		video,
+		canvas {
+			width: 100%;
+			height: 100%;
+			min-height: 420px;
+			object-fit: cover;
+			display: block;
+			background: var(--fg);
+		}
+
+		.scan-frame {
+			position: absolute;
+			inset: 12%;
+			border: 5px solid var(--bg);
+			pointer-events: none;
+		}
+
+		.scan-frame::before,
+		.scan-frame::after {
+			content: "";
+			position: absolute;
+			background: var(--bg);
+		}
+
+		.scan-frame::before {
+			left: 14%;
+			right: 14%;
+			top: 50%;
+			height: 4px;
+		}
+
+		.scan-frame::after {
+			top: 14%;
+			bottom: 14%;
+			left: 50%;
+			width: 4px;
+		}
+
+		.med-list {
+			display: grid;
+			gap: 10px;
+		}
+
+		.med-item {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) auto;
+			gap: 10px;
+			align-items: center;
+			border: 2px solid var(--line);
+			padding: 12px;
+			background: var(--bg);
+		}
+
+		.med-name {
+			font-size: 22px;
+			font-weight: 1000;
+		}
+
+		.med-meta {
+			color: var(--muted);
+			font-size: 15px;
+			font-weight: 780;
+		}
+
+		.calendar-grid {
+			display: grid;
+			grid-template-columns: repeat(7, minmax(0, 1fr));
+			border-left: 2px solid var(--line);
+			border-top: 2px solid var(--line);
+		}
+
+		.day-cell {
+			min-height: 112px;
+			border-right: 2px solid var(--line);
+			border-bottom: 2px solid var(--line);
+			padding: 8px;
+			background: var(--bg);
+			text-align: left;
+			cursor: pointer;
+		}
+
+		.day-num {
+			display: block;
+			font-size: 22px;
+			font-weight: 1000;
+		}
+
+		.day-plan {
+			display: block;
+			margin-top: 6px;
+			font-size: 13px;
+			font-weight: 800;
+			color: var(--muted);
+		}
+
+		.chat-log {
+			height: 360px;
+			overflow: auto;
+			border: 2px solid var(--line);
+			padding: 10px;
+			background: var(--soft);
+		}
+
+		.bubble {
+			margin: 0 0 10px;
+			padding: 10px 12px;
+			border: 2px solid var(--line);
+			background: var(--bg);
+			font-weight: 760;
+		}
+
+		.bubble.user {
+			background: var(--fg);
+			color: var(--bg);
+		}
+
+		.bottom-nav {
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 30;
+			display: grid;
+			grid-template-columns: repeat(6, 1fr);
+			border-top: 3px solid var(--line);
+			background: var(--bg);
+			padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+		}
+
+		.nav-btn {
+			min-height: 78px;
+			border: 0;
+			border-right: 2px solid var(--line);
+			background: var(--bg);
+			color: var(--fg);
+			font-size: 16px;
+			font-weight: 950;
+			cursor: pointer;
+		}
+
+		.nav-btn:last-child {
+			border-right: 0;
+		}
+
+		.nav-btn.active {
+			background: var(--fg);
+			color: var(--bg);
+		}
+
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		.hidden {
+			display: none !important;
+		}
+
+		@media (max-width: 780px) {
+			.hero,
+			.camera-wrap {
+				grid-template-columns: 1fr;
+			}
+
+			.grid,
+			.controls {
+				grid-template-columns: 1fr;
+			}
+
+			.brand-title {
+				font-size: 20px;
+			}
+
+			.main {
+				padding-left: 12px;
+				padding-right: 12px;
+			}
+
+			.status {
+				margin-left: -12px;
+				margin-right: -12px;
+			}
+
+			.bottom-nav {
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			.nav-btn {
+				min-height: 62px;
+			}
+
+			.calendar-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.day-cell {
+				min-height: 86px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="app" id="app">
+		<header class="topbar" aria-label="顶部栏">
+			<div class="brand" tabindex="0" aria-label="药品分辨器，离线恢复版">
+				<h1 class="brand-title">药品分辨器</h1>
+				<span class="brand-subtitle">离线恢复版 · 黑白无障碍</span>
+			</div>
+			<div class="top-actions">
+				<button class="icon-btn" id="speakPageBtn" aria-label="朗读当前页面">读</button>
+				<button class="icon-btn" id="voiceBtn" aria-label="语音助手，按住或点击后说话">说</button>
+			</div>
+		</header>
+
+		<main class="main">
+			<div id="liveStatus" class="status" role="status" aria-live="polite" tabindex="0">页面已准备好</div>
+
+			<section id="home" class="page active" aria-labelledby="homeTitle">
+				<div class="hero">
+					<div class="hero-copy">
+						<span class="kicker">首页</span>
+						<h2 id="homeTitle" class="h1">盲人友好的药品管理</h2>
+						<p class="hero-text">打开页面会自动尝试旁白。每个按钮都能被读屏读出，点击会有声音反馈。数据只保存在本机浏览器。</p>
+					</div>
+					<div class="quick-panel" aria-label="快捷操作">
+						<button data-page="scanner" aria-label="打开扫描器，拍照或选择药名">扫描药品</button>
+						<button data-page="cabinet" aria-label="打开药箱，查看已保存药品">打开药箱</button>
+					</div>
+				</div>
+				<div class="grid" aria-label="主要功能入口">
+					<button class="tile dark" data-page="scanner" aria-label="扫描器，打开摄像头拍摄药盒">
+						<strong>扫描器</strong>
+						<span>拍照、预览、朗读识别结果</span>
+					</button>
+					<button class="tile" data-page="finder" aria-label="找药，按药名或格子寻找药品">
+						<strong>找药</strong>
+						<span>输入药名，播报位置</span>
+					</button>
+					<button class="tile" data-page="cabinet" aria-label="药箱，管理药品和格子">
+						<strong>药箱</strong>
+						<span>保存名称、用法、有效期</span>
+					</button>
+					<button class="tile" data-page="calendar" aria-label="日历，设置每天服药计划">
+						<strong>日历</strong>
+						<span>每天吃什么、何时开始和过期</span>
+					</button>
+					<button class="tile dark" data-page="assistant" aria-label="AI 小助手，离线问答和页面跳转">
+						<strong>小助手</strong>
+						<span>聊天、眼睛知识、页面跳转</span>
+					</button>
+					<button class="tile" data-page="settings" aria-label="设置，调整旁白和声音">
+						<strong>设置</strong>
+						<span>语速、按键音、清理数据</span>
+					</button>
+				</div>
+			</section>
+
+			<section id="scanner" class="page" aria-labelledby="scannerTitle">
+				<div class="section-head">
+					<div>
+						<h2 id="scannerTitle">扫描器</h2>
+						<p>纯离线版不调用云 OCR。可打开摄像头拍照，并从本地药品库选择结果保存。</p>
+					</div>
+				</div>
+				<div class="camera-wrap">
+					<div class="camera-box" aria-hidden="true">
+						<video id="camera" playsinline muted></video>
+						<canvas id="snapshot" class="hidden"></canvas>
+						<div class="scan-frame"></div>
+					</div>
+					<div class="panel">
+						<strong class="panel-title">操作</strong>
+						<div class="controls">
+							<button class="primary" id="openCameraBtn" aria-label="打开摄像头">打开摄像头</button>
+							<button class="secondary" id="captureBtn" aria-label="拍照并预览当前画面">拍照预览</button>
+							<button class="secondary" id="guideBtn" aria-label="朗读药盒摆放提示">摆放提示</button>
+							<button class="danger" id="stopCameraBtn" aria-label="关闭摄像头">关闭摄像头</button>
+						</div>
+						<div class="panel" aria-label="离线识别结果选择">
+							<label for="scanMedicine">选择识别到的最大药名</label>
+							<select id="scanMedicine" aria-label="选择药名"></select>
+							<button class="primary" id="confirmScanBtn" aria-label="确认这个药名并朗读">确认识别结果</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="finder" class="page" aria-labelledby="finderTitle">
+				<div class="section-head">
+					<div>
+						<h2 id="finderTitle">找药</h2>
+						<p>输入药名，页面会朗读药在第几个格子。</p>
+					</div>
+				</div>
+				<div class="input-row">
+					<div>
+						<label for="findInput">药名</label>
+						<input id="findInput" autocomplete="off" aria-label="输入要找的药名">
+					</div>
+					<button class="primary" id="findBtn" aria-label="开始找药">找药</button>
+				</div>
+				<div id="findResult" class="panel" tabindex="0" aria-live="polite">还没有开始找药。</div>
+			</section>
+
+			<section id="cabinet" class="page" aria-labelledby="cabinetTitle">
+				<div class="section-head">
+					<div>
+						<h2 id="cabinetTitle">药箱</h2>
+						<p>新增、朗读、删除药品。所有数据只在本机保存。</p>
+					</div>
+				</div>
+				<div class="panel">
+					<strong class="panel-title">添加服药信息</strong>
+					<div class="grid">
+						<div>
+							<label for="medName">药名</label>
+							<input id="medName" aria-label="药名">
+						</div>
+						<div>
+							<label for="medSlot">格子</label>
+							<input id="medSlot" aria-label="药箱格子，例如一号格">
+						</div>
+						<div>
+							<label for="medDosage">用法用量</label>
+							<input id="medDosage" aria-label="用法用量，例如每日两次，每次一片">
+						</div>
+						<div>
+							<label for="medStart">开始日期</label>
+							<input id="medStart" type="date" aria-label="开始吃药日期">
+						</div>
+						<div>
+							<label for="medExpiry">过期日期</label>
+							<input id="medExpiry" type="date" aria-label="药品过期日期">
+						</div>
+						<div>
+							<label for="medNote">备注</label>
+							<input id="medNote" aria-label="备注">
+						</div>
+					</div>
+					<div class="controls">
+						<button class="primary" id="addMedBtn" aria-label="添加到药箱">添加到药箱</button>
+						<button class="secondary" id="fillDemoBtn" aria-label="填入示例药品">填入示例</button>
+					</div>
+				</div>
+				<div id="medicineList" class="med-list" aria-live="polite"></div>
+			</section>
+
+			<section id="calendar" class="page" aria-labelledby="calendarTitle">
+				<div class="section-head">
+					<div>
+						<h2 id="calendarTitle">服药日历</h2>
+						<p>点某一天，设置当天要吃什么药、开始日期和过期日期。</p>
+					</div>
+				</div>
+				<div class="controls">
+					<button class="secondary" id="prevMonthBtn" aria-label="上一个月">上个月</button>
+					<button class="secondary" id="nextMonthBtn" aria-label="下一个月">下个月</button>
+				</div>
+				<div id="monthTitle" class="panel dark" tabindex="0" aria-live="polite"></div>
+				<div id="calendarGrid" class="calendar-grid" role="grid" aria-label="服药日历"></div>
+				<div class="panel">
+					<strong class="panel-title">当天计划</strong>
+					<label for="planDate">日期</label>
+					<input id="planDate" type="date" aria-label="计划日期">
+					<label for="planMedicine">当天吃什么药</label>
+					<input id="planMedicine" aria-label="当天要吃的药">
+					<label for="planTime">服药时间</label>
+					<input id="planTime" type="time" aria-label="服药时间">
+					<label for="planStart">开始吃药日期</label>
+					<input id="planStart" type="date" aria-label="开始吃药日期">
+					<label for="planExpiry">过期日期</label>
+					<input id="planExpiry" type="date" aria-label="过期日期">
+					<div class="controls">
+						<button class="primary" id="savePlanBtn" aria-label="保存当天服药计划">保存计划</button>
+						<button class="danger" id="deletePlanBtn" aria-label="删除当天服药计划">删除计划</button>
+					</div>
+				</div>
+			</section>
+
+			<section id="assistant" class="page" aria-labelledby="assistantTitle">
+				<div class="section-head">
+					<div>
+						<h2 id="assistantTitle">AI 小助手</h2>
+						<p>离线版用本地规则回答，可聊天、讲眼睛知识、跳转页面。</p>
+					</div>
+				</div>
+				<div id="chatLog" class="chat-log" aria-live="polite" tabindex="0"></div>
+				<div class="input-row">
+					<div>
+						<label for="chatInput">对小助手说</label>
+						<input id="chatInput" aria-label="输入想对小助手说的话，例如打开药箱，眼睛干涩怎么办">
+					</div>
+					<button class="primary" id="sendChatBtn" aria-label="发送给小助手">发送</button>
+				</div>
+			</section>
+
+			<section id="settings" class="page" aria-labelledby="settingsTitle">
+				<div class="section-head">
+					<div>
+						<h2 id="settingsTitle">设置</h2>
+						<p>旁白、按键声音和本地数据。</p>
+					</div>
+				</div>
+				<div class="panel">
+					<label for="rateRange">旁白语速</label>
+					<input id="rateRange" type="range" min="0.7" max="1.5" step="0.1" aria-label="调整旁白语速">
+					<div class="controls">
+						<button class="primary" id="toggleNarratorBtn" aria-label="开启或关闭应用旁白">切换旁白</button>
+						<button class="secondary" id="toggleSoundBtn" aria-label="开启或关闭按键声音">切换按键音</button>
+						<button class="danger" id="resetDataBtn" aria-label="清空本地数据">清空数据</button>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<nav class="bottom-nav" aria-label="底部导航">
+			<button class="nav-btn active" data-page="home" aria-label="首页">首页</button>
+			<button class="nav-btn" data-page="scanner" aria-label="扫描器">扫描</button>
+			<button class="nav-btn" data-page="finder" aria-label="找药">找药</button>
+			<button class="nav-btn" data-page="cabinet" aria-label="药箱">药箱</button>
+			<button class="nav-btn" data-page="calendar" aria-label="日历">日历</button>
+			<button class="nav-btn" data-page="assistant" aria-label="小助手">助手</button>
+		</nav>
+	</div>
+
+	<script src="./app.js"></script>
+</body>
+</html>

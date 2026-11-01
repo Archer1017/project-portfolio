@@ -4,8 +4,8 @@
     "projects": 17,
     "concepts": 1,
     "independent_repositories": 9,
-    "source_repositories": 14,
-    "documentation_repositories": 3,
+    "source_repositories": 16,
+    "documentation_repositories": 1,
     "concept_repositories": 1,
     "prepared_repositories": 18,
     "pending_repositories": 9
@@ -212,13 +212,14 @@
         "修理、进入回忆、操作角色和归还物品的叙事循环。",
         "鼠标操作、窗口适配、柔光和场景层次调整。"
       ],
-      "status": "保留原型设计和开发说明。",
+      "status": "已从历史开发记录恢复 Godot 源码、场景和着色器，重新生成音效并补齐公开字体。",
       "limitations": [
-        "完整可运行交付物仍待整理。"
+        "属于恢复后的原型快照，尚未完成图形显示、性能和完整视觉回归。",
+        "恢复时补齐了项目配置和几何辅助状态，不保证与历史最终版本完全一致。"
       ],
       "repository": "https://github.com/Archer1017/rainy-repair-shop",
-      "repository_kind": "docs-only",
-      "repository_scope": "当前仅收录项目说明，完整源码尚未找回。",
+      "repository_kind": "source",
+      "repository_scope": "恢复的 Godot 原型源码，已完成无界面行为检查；视觉与性能待验收。",
       "sync_status": "pending"
     },
     {
@@ -231,14 +232,14 @@
         "换道、跳跃、滑行、受伤、重开和通关流程。",
         "未来感建模、光影和场景细化。"
       ],
-      "status": "保留原型设计和开发说明。",
+      "status": "已从历史开发记录恢复 Godot 跑酷原型源码和着色器，重新生成音效及云纹理。",
       "limitations": [
-        "完整可运行交付物仍待整理。",
-        "项目名称暂定。"
+        "属于恢复后的原型快照，尚未完成图形显示、性能和完整视觉回归。",
+        "烘焙场景未收录，运行时使用程序化生成；项目名称暂定。"
       ],
       "repository": "https://github.com/Archer1017/beast-runner",
-      "repository_kind": "docs-only",
-      "repository_scope": "当前仅收录项目说明，完整源码尚未找回。",
+      "repository_kind": "source",
+      "repository_scope": "恢复的 Godot 原型源码，已完成无界面行为检查；视觉与性能待验收。",
       "sync_status": "pending"
     },
     {
