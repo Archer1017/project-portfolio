@@ -3,12 +3,12 @@
   "counts": {
     "projects": 17,
     "concepts": 1,
-    "independent_repositories": 9,
+    "independent_repositories": 18,
     "source_repositories": 17,
     "documentation_repositories": 0,
     "concept_repositories": 1,
     "prepared_repositories": 18,
-    "pending_repositories": 9
+    "pending_repositories": 0
   },
   "projects": [
     {
@@ -200,7 +200,7 @@
       ],
       "repository": "https://github.com/Archer1017/bunny-burrow-duo",
       "repository_kind": "source",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P11",
@@ -220,7 +220,7 @@
       "repository": "https://github.com/Archer1017/rainy-repair-shop",
       "repository_kind": "source",
       "repository_scope": "恢复的 Godot 原型源码，已完成无界面行为检查；视觉与性能待验收。",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P12",
@@ -240,7 +240,7 @@
       "repository": "https://github.com/Archer1017/beast-runner",
       "repository_kind": "source",
       "repository_scope": "恢复的 Godot 原型源码，已完成无界面行为检查；视觉与性能待验收。",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P13",
@@ -256,7 +256,7 @@
       ],
       "repository": "https://github.com/Archer1017/stardrop-runner",
       "repository_kind": "source",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P14",
@@ -274,7 +274,7 @@
       ],
       "repository": "https://github.com/Archer1017/dream-weather",
       "repository_kind": "source",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P15",
@@ -294,7 +294,7 @@
       "repository": "https://github.com/Archer1017/hospital-website-template",
       "repository_kind": "source",
       "repository_scope": "恢复的九页静态源码，预约表单为演示。",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P16",
@@ -311,7 +311,7 @@
       ],
       "repository": "https://github.com/Archer1017/cheesy-quotes",
       "repository_kind": "source",
-      "sync_status": "pending"
+      "sync_status": "published"
     },
     {
       "id": "P17",
@@ -329,7 +329,7 @@
       ],
       "repository": "https://github.com/Archer1017/random-spinner",
       "repository_kind": "source",
-      "sync_status": "pending"
+      "sync_status": "published"
     }
   ],
   "concepts": [
@@ -340,8 +340,8 @@
       "status": "已整理设计需求与渲染提示词，尚未确认成品渲染或工程模型。",
       "repository": "https://github.com/Archer1017/tea-thermos-concept",
       "repository_kind": "concept",
-      "sync_status": "pending"
+      "sync_status": "published"
     }
   ],
-  "sync_note": "GitHub 临时限制短时间批量建仓；待同步项目的脱敏内容已在本地准备完成。"
+  "sync_note": "全部项目均已同步到独立公开仓库。"
 }
