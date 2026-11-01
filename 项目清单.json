@@ -4,8 +4,8 @@
     "projects": 17,
     "concepts": 1,
     "independent_repositories": 9,
-    "source_repositories": 16,
-    "documentation_repositories": 1,
+    "source_repositories": 17,
+    "documentation_repositories": 0,
     "concept_repositories": 1,
     "prepared_repositories": 18,
     "pending_repositories": 9
@@ -286,14 +286,14 @@
         "健康资讯、联系和评价页面。",
         "可展开内容、演示预约表单和地图占位。"
       ],
-      "status": "保留模板设计和开发说明。",
+      "status": "已从历史开发代码恢复九页静态网站模板，并替换全部身份与联系占位内容。",
       "limitations": [
-        "完整可运行交付物仍待整理。",
-        "真实挂号后台和地图服务尚未确认接入。"
+        "预约仅为前端演示，不发送或保存数据。",
+        "未接入真实挂号后台与地图服务。"
       ],
       "repository": "https://github.com/Archer1017/hospital-website-template",
-      "repository_kind": "docs-only",
-      "repository_scope": "当前仅收录项目说明，完整源码尚未找回。",
+      "repository_kind": "source",
+      "repository_scope": "恢复的九页静态源码，预约表单为演示。",
       "sync_status": "pending"
     },
     {
